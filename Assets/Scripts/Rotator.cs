@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ControlCube1 : MonoBehaviour
+public class Rotator : MonoBehaviour
 {
     [SerializeField] private float rotateSpeedY = 1.0f;
 
-    private void Update()
+    void Update()
     {
         transform.Rotate(0, rotateSpeedY, 0);
     }

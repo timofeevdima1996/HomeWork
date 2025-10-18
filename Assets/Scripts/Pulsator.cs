@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class ControlCapsule : MonoBehaviour
+public class Pulsator : MonoBehaviour
 {
     [SerializeField] private float speedIncrease = 0.4f;
     [SerializeField] private float scaleMax = 1.5f;
     [SerializeField] private float scaleMin = 0.5f;
     private bool isLimitIncrease = false;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
