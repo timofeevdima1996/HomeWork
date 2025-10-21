@@ -2,31 +2,34 @@ using UnityEngine;
 
 public class Pulsator : MonoBehaviour
 {
-    [SerializeField] private float speedIncrease = 0.4f;
-    [SerializeField] private float scaleMax = 1.5f;
-    [SerializeField] private float scaleMin = 0.5f;
-    private bool isLimitIncrease = false;
+    [SerializeField] private float _speedIncrease = 0.4f;
+    [SerializeField] private float _scaleMax = 1.5f;
+    [SerializeField] private float _scaleMin = 0.5f;
+
+    private bool _isLimitIncrease = false;
 
     void Update()
     {
         var scale = transform.localScale;
 
-        if (isLimitIncrease)
+        if (_isLimitIncrease)
         {
-            scale += new Vector3(speedIncrease, speedIncrease, speedIncrease) * Time.deltaTime;
+            scale += new Vector3(_speedIncrease, _speedIncrease, _speedIncrease) * Time.deltaTime;
             transform.localScale = scale;
-            if (transform.localScale.x >= scaleMax)
+            
+            if (transform.localScale.x >= _scaleMax)
             {
-                isLimitIncrease = false;
+                _isLimitIncrease = false;
             }
         }
-        else if (!isLimitIncrease)
+        else if (!_isLimitIncrease)
         {
-            scale -= new Vector3(speedIncrease, speedIncrease, speedIncrease) * Time.deltaTime;
+            scale -= new Vector3(_speedIncrease, _speedIncrease, _speedIncrease) * Time.deltaTime;
             transform.localScale = scale;
-            if (transform.localScale.x <= scaleMin)
+            
+            if (transform.localScale.x <= _scaleMin)
             {
-                isLimitIncrease = true;
+                _isLimitIncrease = true;
             }
         }
     }
