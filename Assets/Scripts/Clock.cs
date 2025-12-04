@@ -36,8 +36,9 @@ public class Clock : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("W pressed");
             _isWork = !_isWork;
         }
     }
