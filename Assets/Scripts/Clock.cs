@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Clock : MonoBehaviour
 {
@@ -10,19 +11,34 @@ public class Clock : MonoBehaviour
     [SerializeField] private float _step = 1f;
 
     private float _number = 0f;
+    private bool _isCount = true;
     private bool _isWork;
+    private bool _isStartCorutine = true;
     private Coroutine _counterCoroutine;
 
-    void Start()
+    private void Start()
     {
         _isWork = true;
         _text.text = _number.ToString();
         _counterCoroutine = StartCoroutine(Counter());
     }
+    
+    private void Update()
+    {
+        _isCount = Input.GetMouseButtonDown(0);
+                
+        if (_isCount)
+        {
+            Debug.Log("LKM pressed");
+            _isWork = !_isWork;
+        }
+    }
 
     private IEnumerator Counter()
     {
-        while (true)
+        WaitForSeconds delay = new WaitForSeconds(_delay);
+        
+        while (_isStartCorutine)
         {
             if (_isWork)
             {
@@ -30,24 +46,20 @@ public class Clock : MonoBehaviour
                 _text.text = _number.ToString();
             }
 
-            yield return new WaitForSeconds(_delay);
+            yield return delay;
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("W pressed");
-            _isWork = !_isWork;
-        }
-    }
-
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (_counterCoroutine != null)
         {
             StopCoroutine(_counterCoroutine);
         }
+    }
+
+    private void GetInput()
+    {
+
     }
 }
